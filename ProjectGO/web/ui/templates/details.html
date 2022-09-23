@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="ui/stylesheets/details.css" />
+  </head>
+  <body>
+    <div class="catinfo-post">
+      <div class="catinfo-post__img">
+        <img src="{{.Image}}" alt="" />
+      </div>
+      <div class="catinfo-post__info">
+        <div class="catinfo-post__details">
+          {{if not .Info}}
+          <h1 class="catinfo-post__title">Nothing to Show</h1>
+          {{end}} {{range $index, $member := .Info}}
+          <h1 class="catinfo-post__title">{{$member.Name}}</h1>
+          <span>Origin: {{$member.Origin}}</span>
+          <span
+            >Weight: {{$member.Weight.Metric}} kg ({{$member.Weight.Imperial}}
+            pounds)</span
+          >
+          <span>Temperament: {{$member.Temperament}}</span>
+          <span>LifeSpan: {{$member.LifeSpan }} years</span>
+        </div>
+
+        <div class="catinfo-post__description">
+          <h1>Description:</h1>
+
+          {{$member.Description}}
+        </div>
+        {{end}}
+      </div>
+    </div>
+  </body>
+</html>
