@@ -32,13 +32,17 @@
               />
 
               <label for="to">Breed</label>
-              <input
-                type="text"
+              <select
                 name="breed"
                 id="to"
                 class="field"
-                placeholder="Enter breed type"
-              />
+                aria-placeholder="Enter breed type"
+              >
+                <option value="">Any</option>
+                {{range $key, $value := .}}
+                <option>{{$key}}</option>
+                {{end}}
+              </select>
 
               <div>
                 <button class="btn">Search</button>

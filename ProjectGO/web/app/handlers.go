@@ -5,8 +5,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"regexp"
-	"strings"
 	"text/template"
 
 	models "github.com/ZakirAvrora/kolesa-upgrade-homework-3/internal"
@@ -21,13 +19,18 @@ func (app *App) homeHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	mapBreed, err := ExtractBreeds()
+	if err != nil {
+		app.Errors(w, http.StatusServiceUnavailable, err)
+	}
+
 	tmpl, err := template.ParseFiles("web/ui/templates/index.html")
 	if err != nil {
 		app.Errors(w, http.StatusInternalServerError, err)
 		return
 	}
 
-	if err = tmpl.ExecuteTemplate(w, "index.html", nil); err != nil {
+	if err = tmpl.ExecuteTemplate(w, "index.html", mapBreed); err != nil {
 		app.Errors(w, http.StatusInternalServerError, err)
 		return
 	}
@@ -38,8 +41,7 @@ func (app *App) catView(w http.ResponseWriter, r *http.Request) {
 
 	limit := query.Get("limit")
 
-	space := regexp.MustCompile(`\s+`)
-	breed := space.ReplaceAllString(strings.TrimSpace(strings.ToLower(query.Get("breed"))), " ")
+	breed := query.Get("breed")
 
 	mapBreed, err := ExtractBreeds()
 	if err != nil {
@@ -146,7 +148,7 @@ func ExtractBreeds() (map[string]string, error) {
 	}
 
 	for i := range CatBreed {
-		breeds[strings.ToLower(CatBreed[i].Name)] = CatBreed[i].ID
+		breeds[CatBreed[i].Name] = CatBreed[i].ID
 	}
 
 	return breeds, nil
