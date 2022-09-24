@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="static/stylesheets/details.css" />
+  </head>
+  <body>
+    <div class="catinfo-post">
+      <div class="catinfo-post__img">
+        <img src="<?=$Cat->getImage();?>" alt="" />
+      </div>
+      <div class="catinfo-post__info">
+        <div class="catinfo-post__details">
+          <?php if (!$Cat->getExtraInfo()):?>
+          <h1 class="catinfo-post__title">Nothing to Show</h1>
+          <?php endif; ?>
+          
+          <?php if ($Cat->getExtraInfo()):?>
+          <h1 class="catinfo-post__title"><?=$Cat->getName();?></h1>
+          <span>Origin: <?=$Cat->getOrigin();?></span>
+          <span
+            >Weight: <?=$Cat->getWeight();?> kg</span
+          >
+          <span>Temperament: <?=$Cat->getTemperament();?></span>
+          <span>LifeSpan: <?=$Cat->getLifespan();?> years</span>
+        </div>
+
+        <div class="catinfo-post__description">
+          <h1>Description:</h1>
+
+          <?=$Cat->getDescription();?>
+        </div>
+        <?php endif; ?>
+      </div>
+    </div>
+  </body>
+</html>

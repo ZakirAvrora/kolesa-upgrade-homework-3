@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HomePage</title>
+    <link rel="stylesheet" href="static/stylesheets/homePage.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div>
+      <div class="container">
+        <div class="content-box">
+          <div class="left"></div>
+          <div class="right">
+            <h2>Display cat images</h2>
+            <form action="cats" method="GET">
+              <label for="say">The number of images</label>
+              <input
+                type="number"
+                name="limit"
+                id="say"
+                class="field"
+                placeholder="Enter number of images"
+                max="10"
+                required
+              />
+
+              <label for="to">Breed</label>
+              <select
+                name="breed"
+                id="to"
+                class="field"
+                aria-placeholder="Enter breed type"
+              >
+                <option value="">Any</option>
+                <?php foreach($Breeds as $name => $id): ?>
+                <option value="<?=$id;?>"><?=$name;?></option>
+                <?php endforeach; ?>
+              </select>
+
+              <div>
+                <button class="btn">Search</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

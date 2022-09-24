@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cat List FlexBox</title>
+    <link rel="stylesheet" href="static/stylesheets/search.css" />
+  </head>
+  <body>
+    <div class="title">Cat Lists</div>
+    <div class="cards">
+    <?php foreach($Cats as $cat): ?>
+      <a href="details?id=<?=$cat->getId();?>">
+        <div class="card">
+          <img src="<?=$cat->getImage();?>" alt="" class="card__image" />
+        </div>
+      </a>
+      <?php endforeach; ?>
+    </div>
+  </body>
+</html>
